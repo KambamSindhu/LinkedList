@@ -1,0 +1,55 @@
+class Solution {
+    Node divide(Node head) {
+        if(head==null || head.next==null)
+        {
+            return head;
+        }
+        Node even=null;
+        Node evenHead=null;
+        Node oddHead=null;
+        Node odd=null;
+        Node curr=head;
+        while(curr!=null)
+        {
+               Node nextNode = curr.next;  // save next node
+            curr.next = null;           // disconnect current node
+
+            if(curr.data%2==0)
+            {
+                if(evenHead==null)
+                {
+                    evenHead=curr;
+                    even=curr;
+                    even.next=null;
+                }
+                else{
+               even.next=curr;
+               even=curr;
+                }
+            }
+            else
+            {
+                if(oddHead==null)
+                {
+                    oddHead=curr;
+                    odd=curr;
+                    odd.next=null;
+                }
+                else{
+                odd.next=curr;
+                odd=curr;
+                }
+            }
+            curr=nextNode;
+        }
+         if (odd != null) {
+            odd.next = null;
+        }
+        if(even!=null)
+        {
+        even.next=oddHead;
+        return evenHead;
+        }
+        return oddHead;
+    }
+}
