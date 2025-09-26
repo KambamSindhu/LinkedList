@@ -1,0 +1,46 @@
+class Solution {
+    public boolean isPalindrome(Node head) {
+       if(head==null || head.next==null)
+       {
+           return true;
+       }
+       Node middle=findMiddleNode(head);
+       Node newHead=Reverse(middle);
+       while( newHead!=null)
+       {
+           if(head.data!=newHead.data)
+           {
+               return false;
+           }
+           head=head.next;
+           newHead=newHead.next;
+       }
+       return true;
+    }
+    public Node Reverse(Node head)
+    {
+        Node prev=null;
+        Node curr=head;
+        while(curr!=null)
+        {
+            Node nextNode=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=nextNode;
+        }
+        return prev;
+    }
+    public Node findMiddleNode(Node head)
+    {
+         Node slow=head;
+       Node fast=head;
+      
+       while(fast!=null && fast.next!=null)
+       {
+           slow=slow.next;
+           fast=fast.next.next;
+           
+       }
+       return slow;
+    }
+}
