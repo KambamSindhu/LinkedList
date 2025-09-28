@@ -1,0 +1,45 @@
+class Solution {
+    static Node deleteAllOccurOfX(Node head, int x) {
+        // Write your code here
+        
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(temp.data==x)
+            {
+                if(temp==head)
+                {
+                     head = head.next;
+                    
+                     if (head != null) {
+                        head.prev = null;
+                    }
+                    temp=head;
+                
+                }
+                else if(temp.next==null)
+                {
+                    Node prev=temp.prev;
+                    prev.next=null;
+                    temp=null;
+                }
+                else{
+                    
+                    Node prev=temp.prev;
+                    Node nextNode=temp.next;
+                    prev.next=nextNode;
+                    
+                    if(nextNode!=null)
+                    {
+                       nextNode.prev=prev;
+                    }
+                    temp=nextNode;
+                }
+            }
+            else{
+            temp=temp.next;
+            }
+        }
+        return head;
+    }
+}
