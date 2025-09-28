@@ -1,0 +1,47 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+    Node prev;
+    Node(int data)
+    {
+        this.data = data;
+        next = prev = null;
+    }
+}
+*/
+
+class Solution {
+    Node insertAtPos(Node head, int p, int x) {
+        // code here
+         if (head == null) return head;
+
+        Node temp = head;
+        int cnt = 0;
+
+        // Traverse to the p-th node
+        while (cnt < p && temp != null) {
+            temp = temp.next;
+            cnt++;
+        }
+
+        // If p is out of bounds
+        if (temp == null) return head;
+
+        // Insert after temp
+        Node nextNode = temp.next;
+        Node newNode = new Node(x);
+
+        // Linking
+        temp.next = newNode;
+        newNode.prev = temp;
+        newNode.next = nextNode;
+
+        if (nextNode != null) {
+            nextNode.prev = newNode;
+        }
+
+        return head;
+    }
+}
