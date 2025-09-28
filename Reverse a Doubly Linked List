@@ -1,0 +1,17 @@
+class Solution {
+    public Node reverse(Node head) {
+      
+      Node prev=null;
+      Node curr=head;
+      while(curr!=null)
+      {
+          Node nextNode= curr.next;
+          
+          curr.next=prev;
+          curr.prev=nextNode;
+          prev=curr;
+          curr=nextNode;
+      }
+      return prev;
+    }
+}
