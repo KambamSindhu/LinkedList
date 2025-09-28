@@ -1,0 +1,49 @@
+class Solution {
+    public Node cloneLinkedList(Node head) {
+        createACopy(head);
+        connectRandomPointer(head);
+       return connectAllCopyNodes(head);
+    }
+    public Node connectAllCopyNodes(Node head)
+    {
+        Node dummyNode=new Node(-1);
+        Node temp=head;
+        Node res=dummyNode;
+        while(temp!=null)
+        {
+            res.next=temp.next;
+            temp.next=temp.next.next;
+            res=res.next;
+            temp=temp.next;
+        }
+        return dummyNode.next;
+    }
+    public void connectRandomPointer(Node head)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            Node copyNode=temp.next;
+            if(temp.random==null)
+            {
+                copyNode.random=null;
+            }
+            else{
+                copyNode.random=temp.random.next;
+            }
+            temp=temp.next.next;
+        }
+    }
+    public void createACopy(Node head)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            Node copyNode=new Node(temp.data);
+            copyNode.next=temp.next;
+            temp.next=copyNode;
+            temp=temp.next.next;
+            
+        }
+    }
+}
